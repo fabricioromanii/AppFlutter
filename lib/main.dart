@@ -10,6 +10,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
       home: DefaultTabController(
         length: choices.length,
         child: Scaffold(
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
                 icon: Icon(Icons.add_outlined),
                 iconSize:40,
                 color: Colors.white,
-                //onPressed: addTarefa,
+                onPressed: (){},
               ),
             ],
             bottom: TabBar(
@@ -49,9 +52,9 @@ class Choice{
 }
 
 const List<Choice> choices = <Choice>[
-  Choice(title:'Fazer',icon: Icons.assignment_outlined),
+  Choice(title:'Todos',icon: Icons.assignment_outlined),
   Choice(title:'Faculdade',icon: Icons.library_books),
-  Choice(title:'Mercado',icon: Icons.house),
+  Choice(title:'Casa',icon: Icons.house),
   Choice(title:'Reuniões',icon: Icons.people_alt_outlined),
   Choice(title:'Feito',icon: Icons.assignment_turned_in_outlined),
 ];

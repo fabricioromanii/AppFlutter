@@ -74,10 +74,22 @@
       "languageVersion": "2.10"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///C:/Users/fabri/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/nested-0.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "path",
       "rootUri": "file:///C:/Users/fabri/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0-nullsafety.1",
       "packageUri": "lib/",
       "languageVersion": "2.10"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///C:/Users/fabri/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/provider-4.3.2+3",
+      "packageUri": "lib/",
+      "languageVersion": "2.7"
     },
     {
       "name": "sky_engine",
@@ -140,7 +152,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-12-26T00:40:39.848975Z",
+  "generated": "2020-12-26T16:09:05.311909Z",
   "generator": "pub",
   "generatorVersion": "2.10.4"
 }
