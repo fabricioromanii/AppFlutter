@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:CursoFlutter/data/dummy_tarefas.dart';
+import 'package:provider/provider.dart';
 import 'package:CursoFlutter/components/TarefaTile.dart';
-
-class TarefasList extends StatelessWidget {
+import'package:CursoFlutter/provider/tarefas.dart';
+import 'package:CursoFlutter/routes/appRoutes.dart';
+class TarefaList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    final tarefas = {...TAREFAS};
-
+    final Tarefas tarefas = Provider.of(context);
     return Scaffold(
       appBar: AppBar(
-        title : Text('lista de tarefas'),
-        backgroundColor: Colors.grey[900],
-      ),
+      title : Text('Adicionar tarefas'),
+      actions:[
+        IconButton(
+          icon: Icon(Icons.add),
+          iconSize:30,
+          color: Colors.white,
+          onPressed: (){
+           Navigator.of(context).pushNamed(
+             AppRoutes.TAREFA_FORM
+           );
+          },
+        ),
+      ],      
+       backgroundColor: Colors.grey[900],
+       ),
       body: ListView.builder(
-        itemCount: tarefas.length,
-        itemBuilder: (ctx,i)=> TarefaTile(tarefas.values.elementAt(i)),
+        itemCount: tarefas.count,
+        itemBuilder: (ctx,i) => TarefaTile(tarefas.byIndex(i)),
       ),
     );
   }

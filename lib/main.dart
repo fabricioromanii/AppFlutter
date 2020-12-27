@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:CursoFlutter/views/tarefas_list.dart';
+import 'package:provider/provider.dart';
+import 'package:CursoFlutter/provider/tarefas.dart';
+import 'package:CursoFlutter/routes/appRoutes.dart';
+import 'package:CursoFlutter/views/tarefa_form.dart';
+
 
 main(){
   runApp(new MyApp());
@@ -9,37 +14,46 @@ main(){
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: DefaultTabController(
-        length: choices.length,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Organizador De Tarefas"),
-            backgroundColor: Colors.green[900],
-            elevation: 4.0,
-            actions:[
-              IconButton(
-                icon: Icon(Icons.add_outlined),
-                iconSize:40,
-                color: Colors.white,
-                onPressed: (){},
+
+    return ChangeNotifierProvider(
+      create: (ctx) => Tarefas(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Tarefas',
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        home: DefaultTabController(
+          length: choices.length,
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text("Tarefas"),
+              backgroundColor: Colors.green[900],
+              elevation: 4.0,
+              actions:[
+                IconButton(
+                  icon: Icon(Icons.settings),
+                  iconSize:30,
+                  color: Colors.white,
+                  onPressed: (){},
+                ),
+              ],
+              bottom: TabBar(
+                isScrollable:true,
+                tabs: choices.map<Widget>((Choice choice){
+                  return Tab(
+                    text: choice.title,
+                    icon: Icon(choice.icon),
+                  );
+                }).toList(),
               ),
-            ],
-            bottom: TabBar(
-              isScrollable:true,
-              tabs: choices.map<Widget>((Choice choice){
-                return Tab(
-                  text: choice.title,
-                  icon: Icon(choice.icon),
-                );
-              }).toList(),
             ),
+            body:TarefaList(),
           ),
-          body:TarefasList(),
-        ),  
+        ),
+        routes:{
+          AppRoutes.TAREFA_FORM: (_) => TarefaForm()
+        },
       ),
     );
   }
@@ -53,7 +67,7 @@ class Choice{
 
 const List<Choice> choices = <Choice>[
   Choice(title:'Todos',icon: Icons.assignment_outlined),
-  Choice(title:'Faculdade',icon: Icons.library_books),
+  Choice(title:'Faculdade',icon: Icons.school_outlined),
   Choice(title:'Casa',icon: Icons.house),
   Choice(title:'Reuniões',icon: Icons.people_alt_outlined),
   Choice(title:'Feito',icon: Icons.assignment_turned_in_outlined),
@@ -72,7 +86,7 @@ class ChoicePage extends StatelessWidget{
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Icon(choice.icon,color:textStyle.color,),
+            Icon(choice.icon,color:textStyle.color),
             Text(choice.title, style: textStyle),
           ],
         ),
