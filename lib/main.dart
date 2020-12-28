@@ -7,14 +7,12 @@ import 'package:CursoFlutter/provider/tarefas.dart';
 import 'package:CursoFlutter/routes/appRoutes.dart';
 import 'package:CursoFlutter/views/tarefa_form.dart';
 
-
 main(){
   runApp(new MyApp());
 }
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context){
-
     return ChangeNotifierProvider(
       create: (ctx) => Tarefas(),
       child: MaterialApp(
@@ -27,17 +25,8 @@ class MyApp extends StatelessWidget {
           length: choices.length,
           child: Scaffold(
             appBar: AppBar(
-              title: const Text("Tarefas"),
+              title: Text("Tarefas"),
               backgroundColor: Colors.green[900],
-              elevation: 4.0,
-              actions:[
-                IconButton(
-                  icon: Icon(Icons.settings),
-                  iconSize:30,
-                  color: Colors.white,
-                  onPressed: (){},
-                ),
-              ],
               bottom: TabBar(
                 isScrollable:true,
                 tabs: choices.map<Widget>((Choice choice){
@@ -58,7 +47,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class Choice{
   final String title;
   final IconData icon;
@@ -66,7 +54,7 @@ class Choice{
 }
 
 const List<Choice> choices = <Choice>[
-  Choice(title:'Todos',icon: Icons.assignment_outlined),
+  Choice(title:'all',icon: Icons.assignment_outlined),
   Choice(title:'Faculdade',icon: Icons.school_outlined),
   Choice(title:'Casa',icon: Icons.house),
   Choice(title:'Reuniões',icon: Icons.people_alt_outlined),

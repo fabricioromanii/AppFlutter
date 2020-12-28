@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:CursoFlutter/models/tarefas.dart';
+import 'package:CursoFlutter/routes/appRoutes.dart';
+import 'package:provider/provider.dart';
+import 'package:CursoFlutter/provider/tarefas.dart';
 
 class TarefaTile extends StatelessWidget{
   final Tarefa tarefa;
@@ -18,11 +21,37 @@ class TarefaTile extends StatelessWidget{
           children: <Widget>[
             IconButton(
               icon: Icon(Icons.edit),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.of(context).pushNamed(
+                  AppRoutes.TAREFA_FORM,
+                  arguments: tarefa,
+                );
+              },
             ),
             IconButton(
               icon: Icon(Icons.delete),
-              onPressed: (){},
+              onPressed: (){
+                showDialog(context: context,
+                builder:(ctx) => AlertDialog(
+                  title: Text("excluir usuario"),
+                  content: Text("tem certeza?"),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: (){
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("cancelar"),
+                    ),
+                    FlatButton(
+                      onPressed: (){
+                        Provider.of<Tarefas>(context,listen:false).remove(tarefa);
+                        Navigator.of(context).pop();
+                      },
+                      child: Text("confirmar"),
+                    ),
+                  ],
+                ));
+              },
             ),
           ],
         ),
